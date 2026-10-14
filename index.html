@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student ERP - St. Joseph's College (Autonomous)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== LOGIN VIEW ==================== -->
+  <main id="loginView" class="login-container">
+    
+    <!-- Background layers -->
+    <div class="bg-base" style="background-image: url('8_26_1.jpg');"></div>
+    <div class="bg-purple-overlay"></div>
+    
+    <!-- Organic shapes from screenshot -->
+    <div class="cream-circle-backdrop"></div>
+    <div class="bottom-plum-curve"></div>
+    
+    <!-- Bokeh subtle floating lights -->
+    <div class="bokeh-orb bokeh-1"></div>
+    <div class="bokeh-orb bokeh-2"></div>
+    <div class="bokeh-orb bokeh-3"></div>
+
+    <!-- Main Content Area -->
+    <div class="login-layout">
+      
+      <!-- Left Side Branding -->
+      <section class="left-section">
+        <div class="college-pill-badge">
+          <span>St. JOSEPH'S COLLEGE (Autonomous)</span>
+        </div>
+
+        <h1 class="portal-main-title">Student ERP</h1>
+
+        <div class="glass-notice-card">
+          <p>The students are requested not to share the password with the classmates for any reason.</p>
+        </div>
+      </section>
+
+      <!-- Right Side Login Card -->
+      <section class="right-section">
+        <div class="login-card" id="loginCard">
+          
+          <!-- SJC Crest & College Logo -->
+          <div class="logo-wrapper">
+            <img src="SJC_logo_26.jpg" alt="St. Joseph's College (Autonomous), Tiruchirappalli" class="sjc-logo-img">
+          </div>
+
+          <!-- Card Header -->
+          <div class="card-header-text">
+            <h2>Student ERP Login</h2>
+            <p>Sign in to continue</p>
+          </div>
+
+          <!-- Alert Toast Box for Notifications -->
+          <div id="loginAlert" class="alert-box hidden" role="alert"></div>
+
+          <!-- Login Form -->
+          <form id="loginForm" autocomplete="off" onsubmit="handleLogin(event)">
+            <div class="input-group">
+              <label for="username">Username</label>
+              <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                placeholder="Enter username" 
+                required 
+                autocomplete="username"
+              >
+            </div>
+
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="Enter password" 
+                required 
+                autocomplete="current-password"
+              >
+            </div>
+
+            <div class="form-action-row">
+              <a href="#" class="forgot-link" onclick="handleForgotPassword(event)">Forgot Password?</a>
+              <span class="secure-badge">Secure Login</span>
+            </div>
+
+            <button type="submit" id="loginBtn" class="login-btn">
+              <span class="btn-text">Login</span>
+              <span class="btn-spinner hidden"></span>
+            </button>
+          </form>
+
+          <!-- Card Footer -->
+          <footer class="card-footer">
+            <p class="copyright-line">© 2026 Student ERP. All Rights Reserved.</p>
+            <p class="credits-line">Created by JCICT-ERP TEAM</p>
+          </footer>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Bottom Slider Bar Indicator (from screenshot) -->
+    <div class="bottom-slider-bar"></div>
+
+  </main>
+
+
+  <!-- ==================== DASHBOARD / DOWNLOAD VIEW ==================== -->
+  <div id="dashboardView" class="dashboard-container hidden">
+    
+    <!-- Top Navigation Bar -->
+    <header class="dash-navbar">
+      <div class="dash-nav-content">
+        <div class="dash-brand">
+          <div class="dash-logo-box">
+            <img src="SJC_logo_26.jpg" alt="St. Joseph's College" class="dash-logo-img">
+          </div>
+          <div class="dash-brand-title">
+            <h3>St. Joseph's College (Autonomous)</h3>
+            <span>Student Academic ERP & Resources Portal</span>
+          </div>
+        </div>
+
+        <div class="dash-user-controls">
+          <div class="user-profile-badge">
+            <div class="avatar-circle">B</div>
+            <div class="user-meta">
+              <strong id="displayUsername">bastin</strong>
+              <span class="status-indicator"><span class="dot"></span> Online</span>
+            </div>
+          </div>
+          <button class="logout-btn" onclick="handleLogout()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            Sign Out
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Main Content -->
+    <main class="dash-body">
+      
+      <!-- Welcome Banner -->
+      <section class="welcome-card">
+        <div class="welcome-text">
+          <div class="welcome-pill">Verified Student Session</div>
+          <h1>Welcome, <span id="welcomeName">Bastin</span>!</h1>
+          <p>Access and download your academic zip packages, course datasets, and semester resources below.</p>
+        </div>
+        <div class="welcome-action">
+          <button class="download-all-btn" onclick="downloadAllFiles()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download All (4 ZIP Files)
+          </button>
+        </div>
+      </section>
+
+      <!-- Status notification -->
+      <div id="dashNotification" class="dash-toast hidden"></div>
+
+      <!-- File Downloads Grid Section -->
+      <section class="files-section">
+        <div class="section-header">
+          <div>
+            <h2>Available ZIP Packages</h2>
+            <p>Click on any package to download the archive directly to your device.</p>
+          </div>
+          <span class="packages-count">4 Available Packages</span>
+        </div>
+
+        <div class="packages-grid">
+          
+          <!-- Package 1 -->
+          <article class="package-card">
+            <div class="package-icon-wrap">
+              <div class="zip-icon-badge">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+              </div>
+              <span class="file-format-badge">ZIP ARCHIVE</span>
+            </div>
+
+            <div class="package-info">
+              <h3>Set 1 Package</h3>
+              <p class="filename">set1.zip</p>
+              <p class="description">Academic curriculum modules, lecture presentations, assignments and initial course datasets.</p>
+              <div class="package-meta">
+                <span class="meta-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                  ~175 KB
+                </span>
+                <span class="meta-tag verified">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Verified
+                </span>
+              </div>
+            </div>
+
+            <div class="package-footer">
+              <a href="set1.zip" download="set1.zip" class="action-download-btn" onclick="trackDownload('set1.zip')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download set1.zip
+              </a>
+            </div>
+          </article>
+
+          <!-- Package 2 -->
+          <article class="package-card">
+            <div class="package-icon-wrap">
+              <div class="zip-icon-badge">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+              </div>
+              <span class="file-format-badge">ZIP ARCHIVE</span>
+            </div>
+
+            <div class="package-info">
+              <h3>Set 2 Package</h3>
+              <p class="filename">set2.zip</p>
+              <p class="description">Lab exercises, reference textbooks, practical workbooks, and project guidelines.</p>
+              <div class="package-meta">
+                <span class="meta-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                  ~174 KB
+                </span>
+                <span class="meta-tag verified">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Verified
+                </span>
+              </div>
+            </div>
+
+            <div class="package-footer">
+              <a href="set2.zip" download="set2.zip" class="action-download-btn" onclick="trackDownload('set2.zip')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download set2.zip
+              </a>
+            </div>
+          </article>
+
+          <!-- Package 3 -->
+          <article class="package-card">
+            <div class="package-icon-wrap">
+              <div class="zip-icon-badge">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+              </div>
+              <span class="file-format-badge">ZIP ARCHIVE</span>
+            </div>
+
+            <div class="package-info">
+              <h3>Set 3 Package</h3>
+              <p class="filename">set3.zip / set_3.zip</p>
+              <p class="description">Core database scripts, backend schemas, query exercises, and sample datasets.</p>
+              <div class="package-meta">
+                <span class="meta-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                  ~175 KB
+                </span>
+                <span class="meta-tag verified">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Verified
+                </span>
+              </div>
+            </div>
+
+            <div class="package-footer">
+              <a href="set3.zip" download="set3.zip" class="action-download-btn" onclick="trackDownload('set3.zip')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download set3.zip
+              </a>
+            </div>
+          </article>
+
+          <!-- Package 4 -->
+          <article class="package-card">
+            <div class="package-icon-wrap">
+              <div class="zip-icon-badge">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+              </div>
+              <span class="file-format-badge">ZIP ARCHIVE</span>
+            </div>
+
+            <div class="package-info">
+              <h3>Set 4 Package</h3>
+              <p class="filename">set4.zip / set_4.zip</p>
+              <p class="description">Final evaluation repository, project submission templates, and assessment materials.</p>
+              <div class="package-meta">
+                <span class="meta-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                  ~176 KB
+                </span>
+                <span class="meta-tag verified">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Verified
+                </span>
+              </div>
+            </div>
+
+            <div class="package-footer">
+              <a href="set4.zip" download="set4.zip" class="action-download-btn" onclick="trackDownload('set4.zip')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download set4.zip
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Dashboard Footer -->
+      <footer class="dash-footer">
+        <p>© 2026 Student ERP. St. Joseph's College (Autonomous), Tiruchirappalli. All Rights Reserved.</p>
+        <p>Created by JCICT-ERP TEAM</p>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
