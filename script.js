@@ -3,6 +3,9 @@
  * Pure HTML, CSS, JavaScript Logic
  */
 
+// Redirection Link
+const REDIRECTION_URL = "https://alphats.vercel.app/";
+
 // Target Authorized Credentials
 const AUTH_CONFIG = {
   username: "bastin",
@@ -31,6 +34,8 @@ const btnSpinner = loginBtn.querySelector(".btn-spinner");
 const displayUsername = document.getElementById("displayUsername");
 const welcomeName = document.getElementById("welcomeName");
 const dashNotification = document.getElementById("dashNotification");
+const invalidPassModal = document.getElementById("invalidPassModal");
+const invalidImgCard = document.getElementById("invalidImgCard");
 
 // Check existing session on load
 document.addEventListener("DOMContentLoaded", () => {
@@ -38,6 +43,28 @@ document.addEventListener("DOMContentLoaded", () => {
   if (savedUser) {
     showDashboard(savedUser);
   }
+
+  // Hide error image on input change
+  usernameInput.addEventListener("input", () => {
+    if (invalidImgCard && !invalidImgCard.classList.contains("hidden")) {
+      hideInvalidImage();
+      hideAlert();
+    }
+  });
+
+  passwordInput.addEventListener("input", () => {
+    if (invalidImgCard && !invalidImgCard.classList.contains("hidden")) {
+      hideInvalidImage();
+      hideAlert();
+    }
+  });
+
+  // ESC key to close modal
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && invalidPassModal && !invalidPassModal.classList.contains("hidden")) {
+      closeInvalidModal();
+    }
+  });
 });
 
 /**
@@ -49,8 +76,9 @@ function handleLogin(event) {
   const enteredUsername = usernameInput.value.trim();
   const enteredPassword = passwordInput.value.trim();
 
-  // Reset alert
+  // Reset alert & error image
   hideAlert();
+  hideInvalidImage();
 
   // Validate credentials
   if (
@@ -71,11 +99,43 @@ function handleLogin(event) {
     }, 700);
 
   } else {
-    // Show error alert and shake card
+    // Show error alert, image, and shake card
     triggerShake();
     showAlert("error", "Invalid username or password. Please try again.");
+    showInvalidImage();
     passwordInput.value = "";
     passwordInput.focus();
+  }
+}
+
+/**
+ * Show / Hide Invalid Password Image & Modal
+ */
+function showInvalidImage() {
+  if (invalidPassModal) {
+    invalidPassModal.classList.remove("hidden");
+  }
+  if (invalidImgCard) {
+    invalidImgCard.classList.remove("hidden");
+  }
+}
+
+function closeInvalidModal(event) {
+  if (event) {
+    event.preventDefault();
+  }
+  if (invalidPassModal) {
+    invalidPassModal.classList.add("hidden");
+  }
+  passwordInput.focus();
+}
+
+function hideInvalidImage() {
+  if (invalidPassModal) {
+    invalidPassModal.classList.add("hidden");
+  }
+  if (invalidImgCard) {
+    invalidImgCard.classList.add("hidden");
   }
 }
 
@@ -201,4 +261,14 @@ function showDashToast(message, type = "toast-info") {
   toastTimeout = setTimeout(() => {
     dashNotification.classList.add("hidden");
   }, 4500);
+}
+
+/**
+ * Redirect to External Source Code / Notes URL
+ */
+function redirectToSource(event) {
+  if (event) {
+    event.preventDefault();
+  }
+  window.location.href = REDIRECTION_URL;
 }
